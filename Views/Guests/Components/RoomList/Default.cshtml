@@ -1,0 +1,51 @@
+﻿@model List<Room>
+
+<table class="table table-responsive table-hover table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>
+                Room Number
+            </th>
+            <th>
+                Rent of Room
+            </th>
+            <th>
+                Total Rented Room
+            </th>
+            <th>
+                Total Bill
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input asp-for="@item.RoomNumber" class="form-control" readonly />
+                </td>
+                <td>
+                    <input asp-for="@item.RoomRent" class="form-control" readonly />
+                </td>
+                <td>
+                    <input asp-for="@item.Quantity" class="form-control" readonly />
+                </td>
+                <td>
+                    <input asp-for="@item.TotalRoomRent" class="form-control" readonly />
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                Total Room Rent= @ViewBag.Total and No of Room is @ViewBag.Count
+            </td>
+        </tr>
+    </tfoot>
+
+</table>

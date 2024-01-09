@@ -1,0 +1,115 @@
+﻿@model WebApplication1.Models.Guest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Guest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RentDate" class="control-label"></label>
+                <input asp-for="RentDate" class="form-control" />
+                <span asp-validation-for="RentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GuestName" class="control-label"></label>
+                <input asp-for="GuestName" class="form-control" />
+                <span asp-validation-for="GuestName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNo" class="control-label"></label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <hr />
+            <b style="color:red">Age must be eighteen or older.</b>
+
+            <br />
+            <table class="table table-responsive table-hover table-bordered table-striped">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Room Number
+                        </th>
+                        <th>
+                            Room Type
+                        </th>
+                        <th>
+                            Rent of Room
+                        </th>
+                        <th>
+                            Total Rented Room
+                        </th>
+                        <th>
+                            Total Bill
+                        </th>
+                        <th>
+                            <input type="submit" value="Add" name="command" class="btn btn-success " />
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @for (int i = 0; i < Model.Rooms.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input asp-for="Rooms[i].RoomNumber" class="form-control" />
+                            </td>
+                            <td>
+                                <select asp-for="Rooms[i].RoomType"
+                                        asp-items="Html.GetEnumSelectList<Category>()" class="form-control">
+                                </select>
+                            </td>
+                            <td>
+                                <input asp-for="Rooms[i].RoomRent" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="Rooms[i].Quantity" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="Rooms[i].TotalRoomRent" class="form-control" readonly />
+                            </td>
+                            <td>
+                                <button value="delete-@i" name="command">Delete</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>               
+            
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
